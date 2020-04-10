@@ -1,0 +1,22 @@
+version: '3'
+services:
+  colour-api:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on: 
+      - mssql-server
+    environment: 
+      DBServer: "mssql-server"
+      DBPort: "1433"
+      DBUser: "SA"
+      DBPassword: "Pa55w0rd2020"
+      DBName: "ColourDB"
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server
+    environment: 
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd2020"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
